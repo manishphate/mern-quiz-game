@@ -17,14 +17,14 @@ const SignIn = () => {
             acc[name] = value;
             return acc;
         }, {});
-    
+
         const { accessToken, refreshToken } = cookies;
         async function checkUserValidity() {
             try {
-                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{ accessToken, refreshToken }, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`, { accessToken, refreshToken }, {
                     withCredentials: true
                 });
-    
+
                 navigate('/dashboard');
             } catch (error) {
 
@@ -46,9 +46,7 @@ const SignIn = () => {
 
             document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
             document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
-
-
-            // console.log(accessToken);
+   
             if (response.data.success === true) {
                 navigate('/dashboard');
             }
