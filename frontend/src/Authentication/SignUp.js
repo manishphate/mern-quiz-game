@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Cookies from 'js-cookie';
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false);
@@ -14,22 +13,19 @@ const SignUp = () => {
         setSubmitting(true);
         
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/register`, values, {
+            const  response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/register`, values, {
                 withCredentials: true
             });
 
             const { data } = await response.data;
 
-            // document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
-            // document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
-
-            Cookies.set('accessToken', data.accessToken, { path: '/', sameSite: 'none', secure: true });
-            Cookies.set('refreshToken', data.refreshToken, { path: '/', sameSite: 'none', secure: true });
-      
-
-            navigate('/dashboard');
+            document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
+            document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
+            
+            navigate('/');
             
         } catch (error) {
+            // console.error("Error:", error);
 
             if(error.response.status === 409)
             {
