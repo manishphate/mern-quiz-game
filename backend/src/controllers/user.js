@@ -71,13 +71,12 @@ const registerUser = asyncHandler(async (req, res, next) => {
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
     const options = {
-        
+
         httpOnly: true,
         sameSite: 'none',
-        secure: false,  
-        path: '/', 
-        domain: 'localhost',      
-        // domain: '.quiz-619.netlify.app', 
+        secure: false,
+        path: '/',
+        domain: process.env.FRONTEND_APP_DOMAIN,
     }
 
     return res
@@ -94,13 +93,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
                 "User logged in Successfully"
             )
         )
-
-
-    // // Construct the response
-    // const responseData = new ApiResponse(200, createdUser, "User registered successfully");
-
-    // // Send the response
-    // return res.status(200).json(responseData);
 
 })
 
@@ -133,10 +125,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        sameSite: 'none', 
-        secure: false,  
-        path: '/',      
-        domain: 'localhost',
+        sameSite: 'none',
+        secure: false,
+        path: '/',
+        domain: process.env.FRONTEND_APP_DOMAIN,
     }
 
     return res
@@ -210,11 +202,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
         const options = {
             httpOnly: true,
-            sameSite: 'none', 
-            secure: true,  
-            path: '/',   
-            domain: 'localhost', 
-            // domain: '.main--quiz-619.netlify.app',
+            sameSite: 'none',
+            secure: true,
+            path: '/',
+            domain: process.env.FRONTEND_APP_DOMAIN,
         }
 
         const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
@@ -271,7 +262,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         from: process.env.ADMIN_EMAIL,
         to: email,
         subject: 'Reset your password',
-        text: `https://quiz-619.netlify.app/reset-password/${user._id}/${token}`
+        text: `${process.env.CORS_ORIGIN}/reset-password/${user._id}/${token}`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 const app = express()
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
 };
 
@@ -27,5 +27,4 @@ import userRouter from './routes/user.js'
 app.use(userRouter)
 
 
-// app.post("/register",(registerUser))
 export { app }
