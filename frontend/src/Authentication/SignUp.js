@@ -22,7 +22,7 @@ const SignUp = () => {
             document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
             document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
             
-            navigate('/');
+            navigate('/dashboard');
             
         } catch (error) {
             // console.error("Error:", error);
