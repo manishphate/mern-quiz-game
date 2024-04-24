@@ -46,12 +46,12 @@ const SignUp = () => {
         <>
             {loading && (
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900 "></div>
                 </div>
             )}
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 sign-in-title">
                         Sign Up
                     </h2>
                 </div>
@@ -119,12 +119,6 @@ const SignUp = () => {
                                         {isSubmitting ? 'Signing up...' : 'Sign Up'}
                                     </button>
                                 </div>
-                                <p className="mt-10 text-center text-sm text-gray-500">
-                                    Already have an account?{' '}
-                                    <a href="/signIn" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                                        Sign In
-                                    </a>
-                                </p>
                             </Form>
                         )}
                     </Formik>
